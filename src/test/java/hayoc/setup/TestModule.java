@@ -1,9 +1,10 @@
 package hayoc.setup;
 
 import com.google.inject.AbstractModule;
-import com.google.inject.name.Names;
-import hayoc.knowledge.MockBeliefDatabase;
-import hayoc.knowledge.database.AbstractDatabase;
+import hayoc.old.knowledge.MockBeliefDatabase;
+import hayoc.old.knowledge.MockContextDatabase;
+import hayoc.old.knowledge.database.AbstractBeliefDatabase;
+import hayoc.old.knowledge.database.AbstractContextDatabase;
 
 /**
  * Created by hayoc on 1/06/2016.
@@ -12,6 +13,7 @@ public class TestModule extends AbstractModule {
 
     @Override
     protected void configure() {
-        bind(AbstractDatabase.class).to(MockBeliefDatabase.class);
+        bind(AbstractBeliefDatabase.class).to(MockBeliefDatabase.class);
+        bind(AbstractContextDatabase.class).to(MockContextDatabase.class);
     }
 }

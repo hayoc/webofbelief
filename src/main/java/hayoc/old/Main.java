@@ -1,9 +1,13 @@
-package hayoc;
+package hayoc.old;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import hayoc.setup.WebOfBeliefModule;
+import hayoc.old.knowledge.ContextClassification;
+import hayoc.old.knowledge.database.AbstractBeliefDatabase;
+import hayoc.old.knowledge.database.AbstractContextDatabase;
+import hayoc.setup.WOBModule;
 
+import javax.inject.Inject;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -13,12 +17,29 @@ import java.util.concurrent.TimeUnit;
  */
 public class Main {
 
+    @Inject
+    private AbstractBeliefDatabase beliefDatabase;
+    @Inject
+    private AbstractContextDatabase contextDatabase;
+    @Inject
+    private ContextClassification contextClassification;
+
     public static void main(String[] args) {
-        WebOfBeliefModule module = new WebOfBeliefModule();
+        WOBModule module = new WOBModule();
         Injector injector = Guice.createInjector(module);
 
-        injector.getInstance(Main.class).runWoB();
+        injector.getInstance(Main.class).test();
+
     }
+
+
+    private void test() {
+
+
+
+    }
+
+
 
     private void runWoB() {
         ExecutorService executor = Executors.newSingleThreadExecutor();

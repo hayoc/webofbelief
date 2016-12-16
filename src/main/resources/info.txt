@@ -1,0 +1,3 @@
+- Context assignment is transitive. Eg: raven is bird -> context = bird; bird is animal -> context = animal + swallows bird context
+I guess I'm assuming a logic here already, but it should not matter: context is merely a matter of facilitation, not actually influencing - or not much - the outcome
+

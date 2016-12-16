@@ -1,7 +1,7 @@
-package hayoc.knowledge.database;
+package hayoc.old.knowledge.database;
 
 import com.orientechnologies.orient.object.db.OObjectDatabaseTx;
-import hayoc.knowledge.Context;
+import hayoc.old.knowledge.beanz.Context;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.inject.Inject;
@@ -9,7 +9,7 @@ import javax.inject.Inject;
 /**
  * Created by hayoc on 29/05/2016.
  */
-public class ContextDatabase implements AbstractDatabase {
+public class ContextDatabase implements AbstractContextDatabase {
 
     private OObjectDatabaseTx database;
 
@@ -22,7 +22,7 @@ public class ContextDatabase implements AbstractDatabase {
     @Override
     public Context query(String id) {
         for (Context context : database.browseClass(Context.class)) {
-            if (StringUtils.equals(context.getId(), id)) {
+            if (StringUtils.equalsIgnoreCase(context.getId(), id)) {
                 return context;
             }
         }
@@ -30,8 +30,13 @@ public class ContextDatabase implements AbstractDatabase {
     }
 
     @Override
-    public <T> T store(T object) {
-        return null;
+    public Context save(Context context) {
+        return database.save(context);
+    }
+
+    @Override
+    public void delete(Context context) {
+        database.delete(context);
     }
 
     @Override

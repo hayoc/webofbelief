@@ -1,8 +1,8 @@
-package hayoc.knowledge;
+package hayoc.old.knowledge;
 
-import hayoc.knowledge.database.AbstractDatabase;
-import hayoc.knowledge.database.BeliefDatabase;
-import hayoc.knowledge.database.ContextDatabase;
+import hayoc.old.knowledge.beanz.Belief;
+import hayoc.old.knowledge.beanz.Context;
+import hayoc.old.knowledge.database.AbstractBeliefDatabase;
 import org.apache.commons.collections4.MapUtils;
 
 import javax.inject.Inject;
@@ -16,7 +16,7 @@ import java.util.Map;
 public class BeliefSearch {
 
     @Inject
-    private AbstractDatabase beliefDatabase;
+    private AbstractBeliefDatabase beliefDatabase;
 
     public List<Belief> getBeliefs(Context context, float relevance) {
         List<Belief> beliefs = new ArrayList<Belief>();

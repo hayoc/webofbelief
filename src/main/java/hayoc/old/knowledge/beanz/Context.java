@@ -1,4 +1,4 @@
-package hayoc.knowledge;
+package hayoc.old.knowledge.beanz;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,8 +9,6 @@ import java.util.List;
 public class Context {
 
     private String id;
-    private String representation;
-
     private List<String> beliefs;
 
     public String getId() {
@@ -21,25 +19,13 @@ public class Context {
         this.id = id;
     }
 
-    public String getRepresentation() {
-        return representation;
-    }
-
-    public void setRepresentation(String representation) {
-        this.representation = representation;
-    }
-
     public List<String> getBeliefs() {
+        if (beliefs == null)
+            return new ArrayList<>();
         return beliefs;
     }
 
     public void setBeliefs(List<String> beliefs) {
         this.beliefs = beliefs;
-    }
-
-    public void addBelief(String belief) {
-        if (beliefs == null)
-            beliefs = new ArrayList<String>();
-        beliefs.add(belief);
     }
 }

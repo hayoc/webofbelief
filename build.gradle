@@ -3,7 +3,7 @@ version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
 
-sourceCompatibility = 1.5
+sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
@@ -11,13 +11,19 @@ repositories {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
-    compile group: 'com.orientechnologies', name: 'orientdb-core', version: '2.2.0'
-    compile group: 'com.orientechnologies', name: 'orientdb-object', version: '2.2.0'
-    compile 'com.google.guava:guava:19.0'
+    compile group: 'com.orientechnologies', name: 'orientdb-core', version: '2.2.5'
+    compile group: 'com.orientechnologies', name: 'orientdb-object', version: '2.2.5'
+    compile group: 'com.orientechnologies', name: 'orientdb-client', version: '2.2.5'
+    compile group: 'com.orientechnologies', name: 'orientdb-enterprise', version: '2.2.0-beta'
+    compile 'com.google.guava:guava:16.0'
     compile 'com.google.inject:guice:4.0-beta:no_aop'
     compile 'log4j:log4j:1.2.17'
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.4'
     compile group: 'org.apache.commons', name: 'commons-collections4', version: '4.1'
+    compile group: 'org.eclipse.rdf4j', name: 'rdf4j-runtime', version: '2.0'
+    compile group: 'org.apache.hbase', name: 'hbase-shaded-client', version: '1.2.4'
+
+
 
 
 

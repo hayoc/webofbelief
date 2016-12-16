@@ -1,4 +1,4 @@
-package hayoc.knowledge.database;
+package hayoc.old.knowledge.database;
 
 import hayoc.setup.GuiceJUnitRunner;
 import hayoc.setup.TestModule;

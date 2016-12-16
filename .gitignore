@@ -80,8 +80,8 @@ hs_err_pid*
 
 ### Windows ###
 # Windows image file caches
-Thumbs.db
-ehthumbs.db
+Thumbs.beliefs
+ehthumbs.beliefs
 
 # Folder config file
 Desktop.ini

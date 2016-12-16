@@ -1,12 +1,14 @@
-package hayoc.knowledge;
+package hayoc.old.knowledge;
 
-import hayoc.knowledge.database.ContextDatabase;
+import hayoc.old.knowledge.beanz.Belief;
+import hayoc.old.knowledge.beanz.Context;
 import hayoc.setup.GuiceJUnitRunner;
 import hayoc.setup.TestModule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import javax.inject.Inject;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -24,7 +26,7 @@ public class BeliefSearchTest {
     @Test
     public void testBeliefSearch() {
         Context context = new Context();
-        context.addBelief("belief1");
+        context.setBeliefs(Arrays.asList("belief1"));
 
         List<Belief> beliefs = beliefSearch.getBeliefs(context, 0.4f);
         assertEquals(beliefs.size(), 4);

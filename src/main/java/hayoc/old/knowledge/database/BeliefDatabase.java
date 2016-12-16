@@ -1,7 +1,7 @@
-package hayoc.knowledge.database;
+package hayoc.old.knowledge.database;
 
 import com.orientechnologies.orient.object.db.OObjectDatabaseTx;
-import hayoc.knowledge.Belief;
+import hayoc.old.knowledge.beanz.Belief;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.inject.Inject;
@@ -9,7 +9,7 @@ import javax.inject.Inject;
 /**
  * Created by hayoc on 29/05/2016.
  */
-public class BeliefDatabase implements AbstractDatabase {
+public class BeliefDatabase implements AbstractBeliefDatabase {
 
     private OObjectDatabaseTx database;
 
@@ -30,14 +30,18 @@ public class BeliefDatabase implements AbstractDatabase {
     }
 
     @Override
-    public <T> T store(T object) {
-        return database.save(object);
+    public Belief save(Belief belief) {
+        return database.save(belief);
+    }
+
+    @Override
+    public void delete(Belief belief) {
+        database.delete(belief);
     }
 
     @Override
     public void close() {
-        if (!database.isClosed()) {
+        if (!database.isClosed())
             database.close();
-        }
     }
 }

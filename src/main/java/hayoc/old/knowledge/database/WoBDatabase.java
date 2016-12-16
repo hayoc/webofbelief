@@ -1,4 +1,4 @@
-package hayoc.knowledge.database;
+package hayoc.old.knowledge.database;
 
 import com.orientechnologies.orient.object.db.OObjectDatabaseTx;
 
@@ -13,7 +13,8 @@ public class WoBDatabase  {
     private OObjectDatabaseTx database;
 
     public WoBDatabase() {
-        database = new OObjectDatabaseTx("plocal:localhost/webofbelief").open("admin", "admin");
+        database = new OObjectDatabaseTx("remote:localhost/webofbelief").open("admin", "admin");
+        database.getEntityManager().registerEntityClasses("hayoc.old.knowledge.beanz");
     }
 
     public OObjectDatabaseTx getDatabase() {
