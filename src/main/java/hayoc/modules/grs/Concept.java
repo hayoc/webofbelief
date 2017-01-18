@@ -1,13 +1,17 @@
-package hayoc.grs;
+package hayoc.modules.grs;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Hayo on 14/12/2016.
  */
-public class WOBConcept {
+public class Concept {
 
     private String identifier;
-    private String description;
     private String context;
+
+    private List<Concept> properties = new ArrayList<>();
 
     public String getIdentifier() {
         return identifier;
@@ -15,14 +19,6 @@ public class WOBConcept {
 
     public void setIdentifier(String identifier) {
         this.identifier = identifier;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public String getContext() {
@@ -33,13 +29,27 @@ public class WOBConcept {
         this.context = context;
     }
 
+    public List<Concept> getProperties() {
+        return properties;
+    }
+
+    public void setProperties(List<Concept> properties) {
+        this.properties = properties;
+    }
+
     @Override
     public String toString() {
         StringBuffer sb = new StringBuffer();
-        sb.append("WOBConcept {");
+        sb.append("Concept {");
         sb.append(" identifier: " + identifier);
-        sb.append(" | description: " + description);
         sb.append(" | context: " + context);
+        if (!properties.isEmpty()) {
+            sb.append("| properties: ");
+        }
+        for (Concept property : properties) {
+            sb.append(property.getIdentifier() + ",");
+        }
+        sb.setLength(sb.length() - 1);
         sb.append("}");
         return sb.toString();
     }

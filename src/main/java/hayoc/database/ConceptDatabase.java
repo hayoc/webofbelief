@@ -1,6 +1,6 @@
 package hayoc.database;
 
-import hayoc.grs.WOBConcept;
+import hayoc.modules.grs.Concept;
 import hayoc.util.PropertiesLoader;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
@@ -17,9 +17,9 @@ import java.io.IOException;
 /**
  * Created by Hayo on 14/12/2016.
  */
-public class ConceptWOBDatabase implements WOBDatabase {
+public class ConceptDatabase implements WOBDatabase {
 
-    private static final Logger LOG = Logger.getLogger(ConceptWOBDatabase.class);
+    private static final Logger LOG = Logger.getLogger(ConceptDatabase.class);
     private static final String PROPERTIES_PATH = "database.properties";
 
     private PropertiesLoader properties;
@@ -33,7 +33,7 @@ public class ConceptWOBDatabase implements WOBDatabase {
     private byte[] contextBytes = Bytes.toBytes("context");
 
 
-    public ConceptWOBDatabase() {
+    public ConceptDatabase() {
         properties = new PropertiesLoader(PROPERTIES_PATH);
         tableID = properties.get("table");
         columnFamilyID = properties.get("column_family");
@@ -55,7 +55,7 @@ public class ConceptWOBDatabase implements WOBDatabase {
             Admin admin = connection.getAdmin();
             TableName tableName = tableDescriptor.getTableName();
             if (!admin.tableExists(tableName)) {
-                LOG.error("Table "+ tableName.getNameAsString() + "doesn't exist");
+                LOG.error("Table "+ tableName.getNameAsString() + " doesn't exist");
                 System.exit(1);
             }
             table = connection.getTable(tableName);
@@ -68,9 +68,8 @@ public class ConceptWOBDatabase implements WOBDatabase {
     }
 
     @Override
-    public void put(WOBConcept concept) throws IOException {
+    public void put(Concept concept) throws IOException {
         Put put = new Put(Bytes.toBytes(concept.getIdentifier()));
-        put.addColumn(columnFamilyBytes, descriptionBytes, Bytes.toBytes(concept.getDescription()));
         put.addColumn(columnFamilyBytes, contextBytes, Bytes.toBytes(concept.getContext()));
         table.put(put);
     }
@@ -78,9 +77,8 @@ public class ConceptWOBDatabase implements WOBDatabase {
     @Override
     public Object get(String identifier) throws IOException {
         Result result = table.get(new Get(Bytes.toBytes(identifier)));
-        WOBConcept concept = new WOBConcept();
+        Concept concept = new Concept();
         concept.setIdentifier(identifier);
-        concept.setDescription(Bytes.toString(result.getValue(columnFamilyBytes, descriptionBytes)));
         concept.setContext(Bytes.toString(result.getValue(columnFamilyBytes, contextBytes)));
         return concept;
     }

@@ -1,6 +1,6 @@
 package hayoc.database;
 
-import hayoc.grs.WOBConcept;
+import hayoc.modules.grs.Concept;
 
 import java.io.IOException;
 
@@ -10,6 +10,8 @@ import java.io.IOException;
 public interface WOBDatabase {
 
     boolean open();
-    void put(WOBConcept concept) throws IOException;
+
+    void put(Concept concept) throws IOException;
+
     Object get(String identifier) throws IOException;
 }
