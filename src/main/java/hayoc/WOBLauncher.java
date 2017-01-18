@@ -13,7 +13,6 @@ public class WOBLauncher {
     public static void main(String[] args) throws IOException {
         Concept concept = new Concept();
         concept.setIdentifier("testConcept1");
-        concept.setDescription("test description");
         concept.setContext("some context");
 
         ConceptDatabase database = new ConceptDatabase();
