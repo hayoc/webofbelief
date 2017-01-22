@@ -9,6 +9,8 @@ import java.util.List;
 public class Concept {
 
     private String identifier;
+    private String value;
+    private Type type;
     private String context;
 
     private List<Concept> properties = new ArrayList<>();
@@ -19,6 +21,22 @@ public class Concept {
 
     public void setIdentifier(String identifier) {
         this.identifier = identifier;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
     }
 
     public String getContext() {
