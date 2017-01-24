@@ -28,18 +28,21 @@ public class Context {
 
     private List<Concept> concepts;
 
-    private ThoughtBase createThoughtBase() {
+    public ThoughtBase createThoughtBase() {
         ThoughtBase tb = new ThoughtBase();
         List<Thought> thoughts = new ArrayList<>();
         BiMap<String, Concept> predicateMap = HashBiMap.create();
         BiMap<String, Concept> constantMap = HashBiMap.create();
-        BiMap<String, Concept> variableMap = HashBiMap.create();
+        List<String> variableList = new ArrayList<>();
 
         int individuals = 0;
         int collections = 0;
         int variables = 0;
 
         for (Concept concept : concepts) {
+            String variable =  String.valueOf(abc[variables]);
+            boolean variablePresent = false;
+
             for (Concept property : concept.getProperties()) {
                 StringBuffer proposition = new StringBuffer();
 
@@ -48,8 +51,7 @@ public class Context {
                     individuals = appendConstant(constantMap, individuals, concept, proposition);
                 } else {
                     proposition.append("∀");
-                    variables = appendVariable(variableMap, variables, concept, proposition);
-                    String variable = String.valueOf(proposition.charAt(proposition.length()-1));
+                    proposition.append(variable);
                     proposition.append("(");
 
                     collections = appendPredicate(predicateMap, collections, concept, proposition);
@@ -60,16 +62,25 @@ public class Context {
                     proposition.append(variable);
 
                     proposition.append(")");
+
+                    variablePresent = true;
                 }
 
                 Thought thought = new Thought();
                 thought.setProposition(proposition.toString());
                 thoughts.add(thought);
             }
+
+            if (variablePresent) {
+                variableList.add(variable);
+                variables++;
+            }
         }
 
         tb.setThoughts(thoughts);
         tb.setPredicateMap(predicateMap);
+        tb.setConstantMap(constantMap);
+        tb.setVariableList(variableList);
         return tb;
     }
 
@@ -90,17 +101,6 @@ public class Context {
         proposition.append(toPut);
         if (!exists) {
             map.put(String.valueOf(ABC[tracker]), concept);
-            tracker++;
-        }
-        return tracker;
-    }
-
-    private int appendVariable(BiMap<String, Concept> map, int tracker, Concept concept, StringBuffer proposition) {
-        boolean exists = map.containsValue(concept);
-        String toPut =  exists ? map.inverse().get(concept) : String.valueOf(abc[tracker]);
-        proposition.append(toPut);
-        if (!exists) {
-            map.put(String.valueOf(abc[tracker]), concept);
             tracker++;
         }
         return tracker;

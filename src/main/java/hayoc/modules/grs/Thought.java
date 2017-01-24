@@ -14,4 +14,9 @@ public class Thought {
     public void setProposition(String proposition) {
         this.proposition = proposition;
     }
+
+    @Override
+    public String toString() {
+        return proposition;
+    }
 }

@@ -12,8 +12,21 @@ public class Concept {
     private String value;
     private Type type;
     private String context;
-
     private List<Concept> properties = new ArrayList<>();
+
+    public Concept() {};
+
+    public Concept(String identifier, String value, Type type, String context) {
+        this.identifier = identifier;
+        this.value = value;
+        this.type = type;
+        this.context = context;
+    }
+
+    public Concept(String value) {
+        this.value = value;
+    }
+
 
     public String getIdentifier() {
         return identifier;
@@ -57,18 +70,17 @@ public class Concept {
 
     @Override
     public String toString() {
-        StringBuffer sb = new StringBuffer();
-        sb.append("Concept {");
-        sb.append(" identifier: " + identifier);
-        sb.append(" | context: " + context);
-        if (!properties.isEmpty()) {
-            sb.append("| properties: ");
-        }
-        for (Concept property : properties) {
-            sb.append(property.getIdentifier() + ",");
-        }
-        sb.setLength(sb.length() - 1);
-        sb.append("}");
-        return sb.toString();
+        return value;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        Concept concept = (Concept) obj;
+        return concept.identifier.equals(this.identifier);
+    }
+
+    @Override
+    public int hashCode() {
+        return identifier == null ? super.hashCode() : identifier.hashCode();
     }
 }

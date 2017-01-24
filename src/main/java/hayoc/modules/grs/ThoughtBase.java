@@ -11,7 +11,7 @@ public class ThoughtBase {
     private List<Thought> thoughts;
     private Map<String, Concept> predicateMap;
     private Map<String, Concept> constantMap;
-    private Map<String, Concept> variableMap;
+    private List<String> variableList;
 
     public List<Thought> getThoughts() {
         return thoughts;
@@ -29,12 +29,12 @@ public class ThoughtBase {
         this.predicateMap = predicateMap;
     }
 
-    public Map<String, Concept> getVariableMap() {
-        return variableMap;
+    public List<String> getVariableList() {
+        return variableList;
     }
 
-    public void setVariableMap(Map<String, Concept> variableMap) {
-        this.variableMap = variableMap;
+    public void setVariableList(List<String> variableList) {
+        this.variableList = variableList;
     }
 
     public Map<String, Concept> getConstantMap() {
