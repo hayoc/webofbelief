@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -21,19 +21,8 @@ public class ContextTest {
     private Context context;
 
     @Before
-    public void givenConcepts() {
-        context = new Context();
-        List<Concept> concepts = new ArrayList<>();
-
-        Concept socrates = new Concept("c1_socrates", "Socrates", Type.INDIVIDUAL, "c1");
-        socrates.setProperties(getSocratesProperties());
-        concepts.add(socrates);
-
-        Concept human = new Concept("c1_human", "human", Type.COLLECTION, "c1");
-        human.setProperties(getHumanProperties());
-        concepts.add(human);
-
-        context.setConcepts(concepts);
+    public void setup() {
+        context = ContextTestUtils.givenContext();
     }
 
     @Test
@@ -48,25 +37,10 @@ public class ContextTest {
 
         assertEquals("human", thoughtBase.getPredicateMap().get("A").getValue());
 
-/*        System.out.println(Arrays.toString(thoughts.toArray()));
+        System.out.println(Arrays.toString(thoughts.toArray()));
         System.out.println(Arrays.toString(thoughtBase.getConstantMap().entrySet().toArray()));
         System.out.println(Arrays.toString(thoughtBase.getPredicateMap().entrySet().toArray()));
-        System.out.println(Arrays.toString(thoughtBase.getVariableList().toArray()));*/
-
+        System.out.println(Arrays.toString(thoughtBase.getVariableList().toArray()));
     }
 
-    private List<Concept> getSocratesProperties() {
-        List<Concept> properties = new ArrayList<>();
-        properties.add(new Concept("c1_human", "human", Type.COLLECTION, "c1"));
-        properties.add(new Concept("male"));
-        properties.add(new Concept("beard"));
-        return properties;
-    }
-
-    private List<Concept> getHumanProperties() {
-        List<Concept> properties = new ArrayList<>();
-        properties.add(new Concept("mortal"));
-        properties.add(new Concept("biped"));
-        return properties;
-    }
 }
